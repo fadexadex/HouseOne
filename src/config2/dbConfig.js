@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-export const sequelize = new Sequelize("House-One-v2", "postgres", 196976, {
+export const sequelize = new Sequelize("House-One-v2", "postgres", ****, {
   host: "localhost",
   dialect: "postgres",
 });
