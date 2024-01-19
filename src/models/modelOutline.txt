@@ -1,0 +1,76 @@
+customers
+-
+email pk varchar
+password varchar
+phone_number bigint
+first_name varchar
+last_name varchar
+shopping_cart_id
+date_created timestamp
+
+shipping_address
+-
+address_id pk int
+email varchar FK >- customers.email
+street_address varchar
+city varchar
+state varchar
+zip_code int
+
+orders
+-
+order_id int pk
+address_id int FK >- shipping_address.address_id
+email varchar FK >- customers.email
+order_date timestamp
+payment_status
+
+orders_items
+-
+order_item_id pk int
+order_id int FK >- orders.order_id
+item_id int FK >- items.item_id
+quantity int
+special_requests
+
+payment_history
+-
+payment_id int pk
+email varchar FK >- customers.email
+order_id int FK >- orders.order_id
+amount decimal
+date timestamp
+
+
+shopping_cart
+-
+shopping_cart_id int pk
+email varchar FK >- customers.email
+creation_date timestamp
+last_modified timestamp
+status varchar
+
+cart_items
+-
+cart_item_id int pk
+shopping_cart_id int FK >- shopping_cart.shopping_cart_id
+item_id int FK >- items.item_id
+quantity int
+special_requests varchar
+
+items
+-
+item_id int pk
+item_name varchar
+price decimal
+description varchar
+
+
+
+
+
+
+
+
+
+

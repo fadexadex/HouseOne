@@ -1,0 +1,60 @@
+customers
+-
+id string
+name string
+email string
+passwordHash string
+addressId string FK >- address.addressId
+phone varchar
+isAdmin boolean
+
+address
+-
+addressId string
+street string
+apartment string
+city string
+zip int
+country string
+
+products
+-
+id string
+name string
+description string
+richDescription string
+image string
+images string[]
+brand string
+price number
+category string
+countInStock number
+rating number
+isFeatured boolean
+dateCreated timestamp
+
+orderItems
+-
+id string
+productId string FK >- products.id
+quantity number
+
+Orders
+-
+id string
+customerId string FK >- customers.id
+shippingAddressId string FK >- shippingAddresses.id
+status string
+totalPrice number
+orderDate timestamp
+
+shippingAddresses
+-
+id string
+customerId string FK >- customers.id
+shippingAddress1 string
+shippingAddress2 string
+city string
+zip string
+country string
+phone varchar

@@ -1,0 +1,58 @@
+customers
+-
+id string
+name string
+email string
+passwordHash string
+addressId string
+phone bigint
+isAdmin boolean
+
+address
+-
+addressId string FK >- customers.addressId
+street string
+apartment string
+city string
+zip int
+country string
+
+products
+-
+id string FK >- orderItems.product
+name string
+description string
+richDescription string
+image string
+images string[]
+brand string
+price number
+category string
+countInStock number
+rating number
+isFeatured boolean
+dateCreated date
+
+orderItems
+-
+id string 
+product productId
+quantity number
+
+Orders
+-
+id string
+email string FK >- customers.email
+ordersItems OrderItems[] FK >- orderItems.id
+shippingAddress1 string
+shippingAddress2 string
+city string
+zip string
+country string
+phone number 
+status string
+totalPrice number
+orderDate date
+
+
+
