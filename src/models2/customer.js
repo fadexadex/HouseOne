@@ -1,18 +1,20 @@
-import { DataType } from "sequelize";
+import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const Customer = sequelize.define("Customer", {
-  id: {
-    type: DataTypes.STRING,
+export const customer = sequelize.define("customer", {
+  customerId: {
     primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
-  name: DataTypes.STRING,
-  email: DataTypes.STRING,
+  name: { type: DataTypes.STRING, allowNull: false },
+  email: { type: DataTypes.STRING, unique: true },
   passwordHash: DataTypes.STRING,
   addressId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
-      model: "Addresses",
+      model: "addresses",
       key: "addressId",
     },
   },

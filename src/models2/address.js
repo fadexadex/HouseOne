@@ -1,9 +1,12 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const Address = sequelize.define("Address", {
+export const address = sequelize.define("address", {
   addressId: {
-    type: DataTypes.STRING,
+    primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   street: DataTypes.STRING,

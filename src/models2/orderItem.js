@@ -1,16 +1,18 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const OrderItem = sequelize.define("OrderItem", {
-  id: {
+export const orderItem = sequelize.define("orderItem", {
+  orderId: {
     type: DataTypes.STRING,
     primaryKey: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
   productId: {
     type: DataTypes.STRING,
     references: {
-      model: "Products",
-      key: "id",
+      model: "products",
+      key: "productId",
     },
   },
   quantity: DataTypes.INTEGER,

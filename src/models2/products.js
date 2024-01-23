@@ -1,18 +1,20 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const Product = sequelize.define("Product", {
-  id: {
-    type: DataTypes.STRING,
+export const product = sequelize.define("product", {
+  productId: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
+    allowNull: false,
   },
-  name: DataTypes.STRING,
+  name: { type: DataTypes.STRING, required: true },
   description: DataTypes.STRING,
-  richDescription: DataTypes.STRING,
-  image: DataTypes.STRING,
-  images: DataTypes.JSON, // Assuming your database supports JSON type
-  brand: DataTypes.STRING,
-  price: DataTypes.FLOAT,
+  richDescription: { type: DataTypes.STRING, defaultValue: "" },
+  image: { type: DataTypes.STRING, defaultValue: "" },
+  images: [{ type: DataTypes.STRING }],
+  brand: { type: DataTypes.STRING, defaultValue: "" },
+  price: { type: DataTypes.DECIMAL(10, 2) },
   category: DataTypes.STRING,
   countInStock: DataTypes.INTEGER,
   rating: DataTypes.FLOAT,

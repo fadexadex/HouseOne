@@ -1,16 +1,18 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const ShippingAddress = sequelize.define("ShippingAddress", {
-  id: {
-    type: DataTypes.STRING,
+export const shippingAddress = sequelize.define("shippingAddress", {
+  shippingAddressId: {
     primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
   customerId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
-      model: "Customers",
-      key: "id",
+      model: "customers",
+      key: "customerId",
     },
   },
   shippingAddress1: DataTypes.STRING,

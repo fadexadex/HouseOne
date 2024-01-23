@@ -1,28 +1,30 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config2/dbConfig";
 
-export const Order = sequelize.define("Order", {
-  id: {
+export const order = sequelize.define("order", {
+  orderId: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     type: DataTypes.STRING,
     primaryKey: true,
   },
   customerId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
-      model: "Customers",
-      key: "id",
+      model: "customers",
+      key: "customerId",
     },
   },
   shippingAddressId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
-      model: "ShippingAddresses",
-      key: "id",
+      model: "shippingAddresses",
+      key: "shippingAdressId",
     },
   },
   status: DataTypes.STRING,
-  totalPrice: DataTypes.FLOAT,
-  orderDate: DataTypes.DATE,
+  totalPrice: { type: DataTypes.DECIMAL(10, 2) },
+  orderDate: { type: DataTypes.DATE },
 });
 
 // Synchronize the models with the database
