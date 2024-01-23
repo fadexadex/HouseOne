@@ -1,11 +1,10 @@
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-import jwt from "jsonwebtoken";
-
-export function generateToken(id) {
+export function generateRefreshToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "3d",
   });
 }

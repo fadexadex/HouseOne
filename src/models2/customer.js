@@ -20,6 +20,7 @@ export const customer = sequelize.define("customer", {
   },
   phone: DataTypes.STRING,
   isAdmin: DataTypes.BOOLEAN,
+  refreshToken: DataTypes.STRING,
 });
 
 // Synchronize the models with the database

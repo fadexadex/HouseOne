@@ -1,9 +1,17 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-export const sequelize = new Sequelize("House-One", "postgres", 196976, {
-  host: "localhost",
-  dialect: "postgres",
-});
+dotenv.config();
+
+export const sequelize = new Sequelize(
+  "House-One",
+  "postgres",
+  process.env.DB_PASSWORD,
+  {
+    host: "localhost",
+    dialect: "postgres",
+  }
+);
 
 try {
   await sequelize.authenticate();
