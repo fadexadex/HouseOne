@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config2/dbConfig";
+import { sequelize } from "../config2/dbConfig.js";
 
 export const product = sequelize.define("product", {
   productId: {
@@ -28,9 +28,9 @@ export const product = sequelize.define("product", {
   },
   price: DataTypes.DECIMAL(10, 2),
   category: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
-      model: "category",
+      model: "categories",
       key: "categoryId",
     },
   },

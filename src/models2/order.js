@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config2/dbConfig";
+import { sequelize } from "../config2/dbConfig.js";
 
 export const order = sequelize.define("order", {
   orderId: {
@@ -19,7 +19,7 @@ export const order = sequelize.define("order", {
     type: DataTypes.UUID,
     references: {
       model: "shippingAddresses",
-      key: "shippingAdressId",
+      key: "shippingAddressId",
     },
   },
   status: DataTypes.STRING,

@@ -1,10 +1,11 @@
+//Unecessary but still helps show the relationships between the tables
 import { sequelize } from "../config2/dbConfig";
-import { customer } from "./customer";
-import { address } from "./address";
-import { order } from "./order";
-import { shippingAddress } from "./shippingaddress";
-import { product } from "./products";
-import { orderItem } from "./orderItem";
+import { customer } from "./customer.js";
+import { address } from "./address.js";
+import { order } from "./order.js";
+import { shippingAddress } from "./shippingaddress.js";
+import { product } from "./products.js";
+import { orderItem } from "./orderItem.js";
 
 customer.belongsTo(address, {
   foreignKey: "addressId",
