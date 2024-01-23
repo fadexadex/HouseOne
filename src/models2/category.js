@@ -8,5 +8,10 @@ export const category = sequelize.define("category", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
-  name: {},
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  icon: DataTypes.STRING,
+  color: DataTypes.STRING,
 });

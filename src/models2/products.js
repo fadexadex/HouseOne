@@ -3,19 +3,37 @@ import { sequelize } from "../config2/dbConfig";
 
 export const product = sequelize.define("product", {
   productId: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
-  name: { type: DataTypes.STRING, required: true },
+  name: {
+    type: DataTypes.STRING,
+    required: true,
+  },
   description: DataTypes.STRING,
-  richDescription: { type: DataTypes.STRING, defaultValue: "" },
-  image: { type: DataTypes.STRING, defaultValue: "" },
-  images: [{ type: DataTypes.STRING }],
-  brand: { type: DataTypes.STRING, defaultValue: "" },
-  price: { type: DataTypes.DECIMAL(10, 2) },
-  category: DataTypes.STRING,
+  richDescription: {
+    type: DataTypes.STRING,
+    defaultValue: "",
+  },
+  image: {
+    type: DataTypes.STRING,
+    defaultValue: "",
+  },
+  images: DataTypes.STRING,
+  brand: {
+    type: DataTypes.STRING,
+    defaultValue: "",
+  },
+  price: DataTypes.DECIMAL(10, 2),
+  category: {
+    type: DataTypes.STRING,
+    references: {
+      model: "category",
+      key: "categoryId",
+    },
+  },
   countInStock: DataTypes.INTEGER,
   rating: DataTypes.FLOAT,
   isFeatured: DataTypes.BOOLEAN,
