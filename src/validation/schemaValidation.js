@@ -5,5 +5,6 @@ export const createCustomerSchema = Joi.object({
   last_name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
-  token: Joi.string().required(),
+  address: Joi.string().required(),
+  phone: Joi.number().integer().min(0).max(9999999999).required(),
 });
