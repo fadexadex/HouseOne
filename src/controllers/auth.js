@@ -6,6 +6,7 @@ import { createCustomerSchema } from "../validation/schemaValidation.js";
 import { hashPassword } from "../utils/hash.js";
 import { loginSchema } from "../validation/schemaValidation.js";
 
+//create a new customer
 export const createCustomer = asyncHandler(async (req, res) => {
   const { error, value } = createCustomerSchema.validate(req.body);
   if (error) {
