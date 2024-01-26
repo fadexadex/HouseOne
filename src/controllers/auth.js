@@ -83,6 +83,7 @@ export const createCustomer = asyncHandler(async (req, res) => {
   }
 });
 
+//Log an existing user
 export const logCustomer = asyncHandler(async (req, res) => {
   const { error, value } = loginSchema.validate(req.body);
   if (error) {
