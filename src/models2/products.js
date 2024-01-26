@@ -40,12 +40,12 @@ export const product = sequelize.define("product", {
   dateCreated: DataTypes.DATE,
 });
 
-// Synchronize the models with the database
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Database and tables synced");
-  })
-  .catch((error) => {
-    console.error("Error synchronizing the database:", error);
-  });
+// // Synchronize the models with the database
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("Database and tables synced");
+//   })
+//   .catch((error) => {
+//     console.error("Error synchronizing the database:", error);
+//   });

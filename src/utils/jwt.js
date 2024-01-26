@@ -10,3 +10,8 @@ export function generateToken(id) {
     expiresIn: "1d",
   });
 }
+
+//verify access token
+export async function verifyToken(generatedToken) {
+  return jwt.verify(generatedToken, process.env.JWT_SECRET);
+}

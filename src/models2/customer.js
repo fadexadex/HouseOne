@@ -8,7 +8,8 @@ export const customer = sequelize.define("customer", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
-  name: { type: DataTypes.STRING, allowNull: false },
+  first_name: { type: DataTypes.STRING, allowNull: false },
+  last_name: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, unique: true },
   passwordHash: DataTypes.STRING,
   addressId: {
@@ -18,17 +19,17 @@ export const customer = sequelize.define("customer", {
       key: "addressId",
     },
   },
-  phone: DataTypes.STRING,
-  isAdmin: DataTypes.BOOLEAN,
+  phone: DataTypes.DECIMAL,
+  isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
   refreshToken: DataTypes.STRING,
 });
 
-// Synchronize the models with the database
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Database and tables synced");
-  })
-  .catch((error) => {
-    console.error("Error synchronizing the database:", error);
-  });
+// // Synchronize the models with the database
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("Database and tables synced");
+//   })
+//   .catch((error) => {
+//     console.error("Error synchronizing the database:", error);
+//   });
