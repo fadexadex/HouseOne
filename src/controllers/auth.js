@@ -3,12 +3,14 @@ import { address } from "../models2/address.js";
 import asyncHandler from "express-async-handler";
 import { generateToken } from "../utils/jwt.js";
 import { createCustomerSchema } from "../validation/schemaValidation.js";
-import { hashPassword } from "../utils/hash.js";
+import { hashPassword, passwordMatches } from "../utils/hash.js";
 import { loginSchema } from "../validation/schemaValidation.js";
+import { passwordMatches } from "../utils/hash.js";
 
 //create a new customer
 export const createCustomer = asyncHandler(async (req, res) => {
   const { error, value } = createCustomerSchema.validate(req.body);
+
   if (error) {
     return res.status(400).json({ error: "Invalid Request" });
   }
@@ -28,6 +30,7 @@ export const createCustomer = asyncHandler(async (req, res) => {
 
   try {
     const customerExists = await customer.findOne({ where: { email } });
+
     if (customerExists) {
       return res
         .status(409)
@@ -41,9 +44,11 @@ export const createCustomer = asyncHandler(async (req, res) => {
       zip,
       country,
     });
+
     const addressId = homeAddress.addressId;
 
     const passwordHash = await hashPassword(password);
+
     const newCustomer = await customer.create({
       first_name,
       last_name,
@@ -52,6 +57,7 @@ export const createCustomer = asyncHandler(async (req, res) => {
       addressId,
       phone,
     });
+
     if (!newCustomer) {
       return res.status(500).json({ error: "Something went wrong" });
     }
@@ -69,7 +75,9 @@ export const createCustomer = asyncHandler(async (req, res) => {
     };
 
     const token = generateToken(details);
+
     res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
+
     return res.status(201).json({
       message: "Account created Successfully",
       customer: details,
@@ -90,13 +98,21 @@ export const logCustomer = asyncHandler(async (req, res) => {
     return res.status(400).json({ error: "Invalid Request" });
   }
   const { email, password } = value;
+
   try {
-    //
     const customerExists = await customer.findOne({ where: { email } });
     if (!customerExists) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
-    console.log(customerExists);
+
+    const isMatch = await passwordMatches(
+      customerExists?.passwordHash,
+      password
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid Credentials" });
+    }
   } catch (err) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
