@@ -91,6 +91,7 @@ export const logCustomer = asyncHandler(async (req, res) => {
   }
   const { email, password } = value;
   try {
+    //
     const customerExists = await customer.findOne({ where: { email } });
     if (!customerExists) {
       return res.status(401).json({ error: "Invalid Credentials" });
