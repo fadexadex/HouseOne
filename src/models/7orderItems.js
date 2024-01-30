@@ -60,9 +60,9 @@ OrderItem.belongsTo(Item, {
   onUpdate: "CASCADE",
 });
 
-try {
-  await Item.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await Item.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

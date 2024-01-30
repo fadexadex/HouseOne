@@ -36,9 +36,9 @@ export const shoppingCart = sequelize.define("shoppingCart", {
 // onUpdate: "CASCADE",
 // });
 
-try {
-  await shoppingCart.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await shoppingCart.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

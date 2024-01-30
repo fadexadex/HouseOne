@@ -5,10 +5,9 @@ import { generateToken } from "../utils/jwt.js";
 import { createCustomerSchema } from "../validation/schemaValidation.js";
 import { hashPassword, passwordMatches } from "../utils/hash.js";
 import { loginSchema } from "../validation/schemaValidation.js";
-import { passwordMatches } from "../utils/hash.js";
 
 //create a new customer
-export const createCustomer = asyncHandler(async (req, res) => {
+export const createCustomer = async (req, res) => {
   const { error, value } = createCustomerSchema.validate(req.body);
 
   if (error) {
@@ -89,10 +88,10 @@ export const createCustomer = asyncHandler(async (req, res) => {
       .status(500)
       .json({ message: "Internal Server Error", error: error.message });
   }
-});
+};
 
 //Log an existing user
-export const logCustomer = asyncHandler(async (req, res) => {
+export const logCustomer = async (req, res) => {
   const { error, value } = loginSchema.validate(req.body);
   if (error) {
     return res.status(400).json({ error: "Invalid Request" });
@@ -100,24 +99,25 @@ export const logCustomer = asyncHandler(async (req, res) => {
   const { email, password } = value;
 
   try {
-    const customer = await customer.findOne({ where: { email } });
-    if (!customer) {
+    const aCustomer = await customer.findOne({ where: { email } });
+    if (!aCustomer) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
-    const isMatch = await passwordMatches(customer?.passwordHash, password);
+    const isMatch = await passwordMatches(password, aCustomer?.passwordHash);
 
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
-    const token = generateToken(customer);
+    const token = generateToken(aCustomer);
 
     return res.status(201).json({
       message: "Login Successful",
       token: token,
     });
   } catch (err) {
+    console.error(err.message);
     return res.status(500).json({ message: "Internal Server Error" });
   }
-});
+};

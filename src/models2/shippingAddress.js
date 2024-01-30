@@ -24,11 +24,11 @@ export const shippingAddress = sequelize.define("shippingAddress", {
 });
 
 // Synchronize the models with the database
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Database and tables synced");
-  })
-  .catch((error) => {
-    console.error("Error synchronizing the database:", error);
-  });
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("Database and tables synced");
+//   })
+//   .catch((error) => {
+//     console.error("Error synchronizing the database:", error);
+//   });

@@ -56,9 +56,9 @@ shippingAddress.belongsTo(Customer, {
   onUpdate: "CASCADE",
 });
 
-try {
-  await shippingAddress.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await shippingAddress.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

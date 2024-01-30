@@ -54,9 +54,9 @@ export const cartItem = sequelize.define("cartItem", {
 //   onUpdate: "CASCADE",
 // });
 
-try {
-  await cartItem.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await cartItem.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

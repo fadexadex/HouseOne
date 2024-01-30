@@ -24,9 +24,9 @@ export const Item = sequelize.define("Item", {
   },
 });
 
-try {
-  await Item.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await Item.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

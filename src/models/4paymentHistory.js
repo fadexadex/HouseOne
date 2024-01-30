@@ -78,9 +78,9 @@ paymentHistory.belongsTo(Order, {
   onUpdate: "CASCADE",
 });
 
-try {
-  await paymentHistory.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await paymentHistory.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }

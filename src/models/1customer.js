@@ -40,9 +40,9 @@ export const Customer = sequelize.define("Customer", {
 // onUpdate: "CASCADE",
 // });
 
-try {
-  await Customer.sync();
-} catch (error) {
-  console.log(error.message);
-  console.log("Unable to sync to database");
-}
+// try {
+//   await Customer.sync();
+// } catch (error) {
+//   console.log(error.message);
+//   console.log("Unable to sync to database");
+// }
