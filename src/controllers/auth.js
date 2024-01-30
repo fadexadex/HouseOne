@@ -100,19 +100,23 @@ export const logCustomer = asyncHandler(async (req, res) => {
   const { email, password } = value;
 
   try {
-    const customerExists = await customer.findOne({ where: { email } });
-    if (!customerExists) {
+    const customer = await customer.findOne({ where: { email } });
+    if (!customer) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
-    const isMatch = await passwordMatches(
-      customerExists?.passwordHash,
-      password
-    );
+    const isMatch = await passwordMatches(customer?.passwordHash, password);
 
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
+
+    const token = generateToken(customer);
+
+    return res.status(201).json({
+      message: "Login Successful",
+      token: token,
+    });
   } catch (err) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
