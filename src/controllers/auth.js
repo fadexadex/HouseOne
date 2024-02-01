@@ -121,3 +121,51 @@ export const logCustomer = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+//Login passport
+export const passportLogCustomer = async (email, password, cb) => {
+  // const { error, value } = loginSchema.validate(req.body);
+  // if (error) {
+  //   return res.status(400).json({ error: "Invalid Request" });
+  // }
+  // const { email, password } = value;
+
+  try {
+    const aCustomer = await customer.findOne({ where: { email } });
+    if (!aCustomer) {
+      return cb(null, false);
+      // return res.status(401).json({ error: "Invalid Credentials" });
+    }
+
+    const isMatch = await passwordMatches(password, aCustomer?.passwordHash);
+
+    if (!isMatch) {
+      return cb(null, false);
+      // return res.status(401).json({ error: "Invalid Credentials" });
+    }
+    const token = generateToken(aCustomer);
+    return cb(null, aCustomer);
+
+    // return res.status(201).json({
+    //   message: "Login Successful",
+    //   token: token,
+    // });
+  } catch (err) {
+    console.error(err.message);
+    return cb(err);
+  }
+};
+
+// Function to handle successful login
+export const handleSuccessfulLogin = (req, res) => {
+  return res.status(200).json({
+    message: "Login Successful",
+    user: req.user,
+    // You can include a token here if needed
+  });
+};
+
+// Function to handle failed login
+export const handleFailedLogin = (req, res) => {
+  return res.status(401).json({ message: "Invalid Credentials" });
+};
