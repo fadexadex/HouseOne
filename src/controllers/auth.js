@@ -92,6 +92,7 @@ export const createCustomer = async (req, res) => {
 
 //Log an existing user
 export const logCustomer = async (req, res) => {
+  ``;
   const { error, value } = loginSchema.validate(req.body);
   if (error) {
     return res.status(400).json({ error: "Invalid Request" });
@@ -124,32 +125,25 @@ export const logCustomer = async (req, res) => {
 
 //Login passport
 export const passportLogCustomer = async (email, password, cb) => {
-  // const { error, value } = loginSchema.validate(req.body);
-  // if (error) {
-  //   return res.status(400).json({ error: "Invalid Request" });
-  // }
-  // const { email, password } = value;
+  const { error, value } = await loginSchema.validateAsync({ email, password });
+  if (error) {
+    return res.status(400).json({ error: "Invalid Request" });
+  }
+  const { email, password } = value;
 
   try {
     const aCustomer = await customer.findOne({ where: { email } });
     if (!aCustomer) {
       return cb(null, false);
-      // return res.status(401).json({ error: "Invalid Credentials" });
     }
 
     const isMatch = await passwordMatches(password, aCustomer?.passwordHash);
 
     if (!isMatch) {
       return cb(null, false);
-      // return res.status(401).json({ error: "Invalid Credentials" });
     }
     const token = generateToken(aCustomer);
     return cb(null, aCustomer);
-
-    // return res.status(201).json({
-    //   message: "Login Successful",
-    //   token: token,
-    // });
   } catch (err) {
     console.error(err.message);
     return cb(err);
@@ -160,7 +154,17 @@ export const passportLogCustomer = async (email, password, cb) => {
 export const handleSuccessfulLogin = (req, res) => {
   return res.status(200).json({
     message: "Login Successful",
-    user: req.user,
+    user: {
+      customerId: req.user?.customerId,
+      first_name: req.user?.first_name,
+      last_name: req.user?.last_name,
+      email: req.user?.email,
+      phone: req.user?.phone,
+      addressId: req.user?.addressId,
+      updatedAt: req.user?.updatedAt,
+      createdAt: req.user?.createdAt,
+      isAdmin: req.user?.isAdmin,
+    },
     // You can include a token here if needed
   });
 };
