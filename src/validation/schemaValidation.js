@@ -30,3 +30,7 @@ export const updateUserDetails = Joi.object({
   zip: Joi.string().required(),
   country: Joi.string().required(),
 });
+
+export const email = Joi.object({
+  email: Joi.string().email().required(),
+});

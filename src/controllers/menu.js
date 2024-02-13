@@ -16,7 +16,7 @@ export const getMenu = async (req, res) => {
 
 export const getMenuById = async (req, res) => {
   try {
-    const { productId } = req.params;
+    const { productId } = req.params.id;
     const product = await product.findOne({ productId });
     return res.status(201).json(product);
   } catch (error) {

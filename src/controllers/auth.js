@@ -1,6 +1,5 @@
 import { customer } from "../models2/customer.js";
 import { address } from "../models2/address.js";
-import asyncHandler from "express-async-handler";
 import { generateToken } from "../utils/jwt.js";
 import { createCustomerSchema } from "../validation/schemaValidation.js";
 import { hashPassword, passwordMatches } from "../utils/hash.js";
